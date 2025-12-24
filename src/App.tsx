@@ -1,8 +1,10 @@
+import { Button } from "@/components/ui/button";
+
 function App() {
   return (
     <>
-      <div>
-        <h1>Product Inventory Panel</h1>
+      <div className="p-10">
+        <Button>shadcn is working</Button>
       </div>
     </>
   );
