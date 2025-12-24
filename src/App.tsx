@@ -1,11 +1,13 @@
-import { Button } from "@/components/ui/button";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 function App() {
   return (
     <>
-      <div className="p-10">
-        <Button>shadcn is working</Button>
-      </div>
+      <Routes>
+        <Route path="/" element={<Navigate to="/products" replace />} />
+        <Route path="/products" element={<div>Products Page</div>} />
+        <Route path="/products/new" element={<div>Add Product Page</div>} />
+      </Routes>
     </>
   );
 }
