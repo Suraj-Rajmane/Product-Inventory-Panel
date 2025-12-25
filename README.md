@@ -1,73 +1,67 @@
-# React + TypeScript + Vite
+# Product Inventory Panel
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple product inventory management panel built with React and TypeScript.  
+The application allows users to view products and add new products using a validated form.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Setup Instructions
 
-## React Compiler
+### Prerequisites
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Node.js (v18 or later recommended)
+- npm
 
-## Expanding the ESLint configuration
+### Steps to run locally
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+```bash
+# Clone the repository
+git clone https://github.com/Suraj-Rajmane/Product-Inventory-Panel.git
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+# Navigate to the project directory
+cd product-inventory-panel
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+# Install dependencies
+npm install
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Start the development server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Overview of Approach
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- Built the application using React and TypeScript, with a strong focus on clean structure, maintainability, and type safety.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Used React Router to handle navigation between the product listing and product creation pages.
+
+- Used React Query (TanStack Query) to manage asynchronous operations and mutations, keeping data-fetching logic predictable and scalable.
+
+- Leveraged shadcn/ui components for form controls and UI elements, ensuring consistency, accessibility, and a clean design system.
+
+- Styled the UI using Tailwind CSS, keeping the layout minimal, readable, and responsive.
+
+- Kept components modular and avoided unnecessary abstractions to maintain clarity and ease of understanding.
+
+- Implemented the product creation form using React Hook Form for efficient, performant form state management.
+
+- Added schema-based validation with Zod, integrated via @hookform/resolvers, to ensure consistent runtime and compile-time validation.
+
+### Time Taken: ~7 hours
+
+- Project setup & routing (Set up React+Typescript project, Tailwind CSS, shadcn/ui, React-Router and React-Query): ~1 hour
+
+- Fetching products data, search, filter and sort functionality: ~2 hours
+
+- Form handling & validation: ~2 hours
+
+- UI polish & spacing: ~1 hour
+
+- Debugging, cleanup and refactoring code: ~1 hour
+
+### Known limitations or TODOs
+
+- Did not implement Zustand for managing product form or filter state
+
+- Did not implement in-place edit for product stock
+
+- Did not persist new product / product edit in localStorage
