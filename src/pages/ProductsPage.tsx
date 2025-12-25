@@ -16,6 +16,12 @@ export default function ProductsPage() {
 
   const debouncedSearch = useDebounce(search);
 
+  type SortField = "price" | "stock" | null;
+  type SortOrder = "asc" | "desc";
+
+  const [sortField, setSortField] = useState<SortField>(null);
+  const [sortOrder, setSortOrder] = useState<SortOrder>("asc");
+
   /* Categories */
   const categories = useMemo(() => {
     if (!data) return [];
@@ -38,8 +44,17 @@ export default function ProductsPage() {
       result = result.filter((p) => p.category === category);
     }
 
+    if (sortField) {
+      result.sort((a, b) => {
+        const aValue = a[sortField];
+        const bValue = b[sortField];
+
+        return sortOrder === "asc" ? aValue - bValue : bValue - aValue;
+      });
+    }
+
     return result;
-  }, [data, debouncedSearch, category]);
+  }, [data, debouncedSearch, category, sortField, sortOrder]);
 
   /* Pagination */
   const totalPages = Math.ceil(filteredProducts.length / PAGE_LENGTH);
@@ -52,6 +67,19 @@ export default function ProductsPage() {
   /* Reset page when filters change */
   if (pageNumber > totalPages && totalPages > 0) {
     setPageNumber(1);
+  }
+
+  function handleSort(field: SortField) {
+    setPageNumber(1);
+
+    if (sortField === field) {
+      // toggle direction
+      setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"));
+    } else {
+      // new column => default to asc
+      setSortField(field);
+      setSortOrder("asc");
+    }
   }
 
   return (
@@ -84,6 +112,9 @@ export default function ProductsPage() {
         products={paginatedProducts}
         isLoading={isLoading}
         isError={isError}
+        sortField={sortField}
+        sortOrder={sortOrder}
+        onSort={handleSort}
       />
 
       <Pagination
