@@ -4,6 +4,8 @@ import { useDebounce } from "@/hooks/useDebounce";
 import { useProducts } from "@/hooks/useProducts";
 import { ProductsTable } from "./ProductsTable";
 import { Pagination } from "@/components/Pagination";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const PAGE_LENGTH = 10;
 
@@ -106,6 +108,10 @@ export default function ProductsPage() {
             </option>
           ))}
         </select>
+
+        <Link to="/products/new">
+          <Button>Add Product</Button>
+        </Link>
       </div>
 
       <ProductsTable
